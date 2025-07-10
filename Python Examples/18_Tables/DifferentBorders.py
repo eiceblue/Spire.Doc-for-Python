@@ -1,16 +1,15 @@
 ﻿from spire.doc import *
 from spire.doc.common import *
 
-
+    
 def setTableBorders(table):
-    table.TableFormat.Borders.BorderType(BorderStyle.Single)
-    table.TableFormat.Borders.LineWidth(3.0)
-    table.TableFormat.Borders.Color(Color.get_Red())
-
+    table.Format.Borders.BorderType=BorderStyle.Single
+    table.Format.Borders.LineWidth=3.0
+    table.Format.Borders.Color=Color.get_Red()
 def setCellBorders(tableCell):
-    tableCell.CellFormat.Borders.BorderType(BorderStyle.DotDash)
-    tableCell.CellFormat.Borders.LineWidth(1.0)
-    tableCell.CellFormat.Borders.Color(Color.get_Green())
+    tableCell.CellFormat.Borders.BorderType=BorderStyle.DotDash
+    tableCell.CellFormat.Borders.LineWidth=1.0
+    tableCell.CellFormat.Borders.Color=Color.get_Green()
 
 inputFile = "./Data/TableSample.docx"
 outputFile = "DifferentBorders.docx"
@@ -19,8 +18,7 @@ outputFile = "DifferentBorders.docx"
 document = Document()
 document.LoadFromFile(inputFile)
 
-table = document.Sections[0].Tables[0] if isinstance(
-    document.Sections[0].Tables[0], Table) else None
+table = document.Sections[0].Tables[0] if isinstance(document.Sections[0].Tables[0], Table) else None
 
 # Set borders of table
 setTableBorders(table)

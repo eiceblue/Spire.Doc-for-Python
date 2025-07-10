@@ -3,7 +3,7 @@ from spire.doc import *
 from spire.doc.common import *
 
 
-outputFile = "PageSetup.doc"
+outputFile = "PageSetup.docx"
 #Create Word document.
 document = Document()
 section = document.AddSection()
@@ -63,6 +63,11 @@ row.IsHeader = True
 row.Height = 20
 row.HeightType = TableRowHeightType.Exactly
 row.RowFormat.BackColor = Color.get_Gray()
+
+i = 0
+while i < row.Cells.Count:
+    row.Cells[i].CellFormat.Shading.BackgroundPatternColor = Color.get_Gray()
+    i += 1
 i = 0
 while i < len(header):
     row.Cells[i].CellFormat.VerticalAlignment = VerticalAlignment.Middle
@@ -71,12 +76,16 @@ while i < len(header):
     txtRange = p.AppendText(header[i])
     txtRange.CharacterFormat.Bold = True
     i += 1
+
 r = 0
 while r < len(data):
     dataRow = table.Rows[r + 1]
     dataRow.Height = 20
     dataRow.HeightType = TableRowHeightType.Exactly
-    dataRow.RowFormat.BackColor = Color.Empty()
+    c = 0
+    while c < dataRow.Cells.Count:
+        dataRow.Cells[c].CellFormat.Shading.BackgroundPatternColor = Color.Empty()
+        c += 1
     c = 0
     while c < len(data[r]):
         dataRow.Cells[c].CellFormat.VerticalAlignment = VerticalAlignment.Middle
@@ -85,5 +94,5 @@ while r < len(data):
     r += 1
 
 #Save doc file.
-document.SaveToFile(outputFile, FileFormat.Doc)
+document.SaveToFile(outputFile, FileFormat.Docx2019)
 document.Close()

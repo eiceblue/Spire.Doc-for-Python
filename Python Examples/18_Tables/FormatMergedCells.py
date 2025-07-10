@@ -21,7 +21,7 @@ def AddTable(section):
             if not str(dt[r][c]) == '':
                 textRange = dataRow.Cells[c].AddParagraph().AppendText(dt[r][c])
                 textRange.CharacterFormat.FontName = "Arial"
-
+                dataRow.Cells[c].CellFormat.Shading.BackgroundPatternColor = Color.Empty()
 
     return table
   

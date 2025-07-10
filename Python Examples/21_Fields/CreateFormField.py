@@ -118,7 +118,7 @@ def _AddForm(section):
     for node in sectionNodes:
         #create a row for field group label, does not copy format
         row = table.AddRow(False)
-        row.Cells[0].CellFormat.BackColor = Color.FromArgb(0xFF, 0x00, 0x71, 0xb6)
+        row.Cells[0].CellFormat.Shading.BackgroundPatternColor = Color.FromArgb(0xFF, 0x00, 0x71, 0xb6)
         row.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle
 
         #label of field group

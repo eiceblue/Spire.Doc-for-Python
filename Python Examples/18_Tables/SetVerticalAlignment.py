@@ -40,11 +40,11 @@ for r in range(0, 3):
         if c == 1:
             par = dataRow.Cells[c].AddParagraph()
             par.AppendText(data[r][c])
-            dataRow.Cells[c].Width = (section.PageSetup.ClientWidth) / 2
+            dataRow.Cells[c].SetCellWidth((section.PageSetup.ClientWidth) / 2, CellWidthType.Point)
         if c == 2:
             par = dataRow.Cells[c].AddParagraph()
             par.AppendText(data[r][c])
-            dataRow.Cells[c].Width = (section.PageSetup.ClientWidth) / 2
+            dataRow.Cells[c].SetCellWidth((section.PageSetup.ClientWidth) / 2, CellWidthType.Point)
 
 # Save and launch document
 doc.SaveToFile(outputFile, FileFormat.Docx)

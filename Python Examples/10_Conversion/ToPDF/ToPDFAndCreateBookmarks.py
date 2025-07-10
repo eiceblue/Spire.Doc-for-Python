@@ -11,9 +11,9 @@ document.LoadFromFile(inputFile)
 parames = ToPdfParameterList()
 #Set CreateWordBookmarks to true
 parames.CreateWordBookmarks = True
-#//Create bookmarks using Headings
-#parames.CreateWordBookmarksUsingHeadings = true
+#Create bookmarks using Headings
+#parames.CreateWordBookmarksUsingHeadings = True
 #Create bookmarks using word bookmarks
 parames.CreateWordBookmarksUsingHeadings = False
-document.SaveToFile(outputFile, FileFormat.PDF)
+document.SaveToFile(outputFile, parames)
 document.Close()

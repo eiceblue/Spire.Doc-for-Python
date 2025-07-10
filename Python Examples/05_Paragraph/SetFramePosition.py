@@ -16,9 +16,9 @@ document.LoadFromFile(inputFile)
 paragraph = document.Sections[0].Paragraphs[0]
 
 #Set the Frame's position
-if paragraph.Format.IsFrame:
-    paragraph.Format.Frame.SetHorizontalPosition(150)
-    paragraph.Format.Frame.SetVerticalPosition(150)
+if paragraph.IsFrame:
+    paragraph.Frame.SetHorizontalPosition(150)
+    paragraph.Frame.SetVerticalPosition(150)
 
 #Save to file.
 document.SaveToFile(outputFile, FileFormat.Docx2013)

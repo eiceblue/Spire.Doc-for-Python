@@ -24,10 +24,10 @@ table = header.AddTable()
 table.ResetCells(4, 2)
 
 # Set the position of the table to the right of the image
-table.TableFormat.WrapTextAround = True
-table.TableFormat.Positioning.HorizPositionAbs = HorizontalPosition.Outside
-table.TableFormat.Positioning.VertRelationTo = VerticalRelation.Margin
-table.TableFormat.Positioning.VertPosition = 43
+table.Format.WrapTextAround = True
+table.Format.Positioning.HorizPositionAbs = HorizontalPosition.Outside
+table.Format.Positioning.VertRelationTo = VerticalRelation.Margin
+table.Format.Positioning.VertPosition = 43
 
 # Add contents for the table
 data = [["Spire.Doc.left", "Spire XLS.right"], ["Spire.Presentatio.left", "Spire.PDF.right"], [
@@ -40,12 +40,12 @@ for r in range(0, 4):
             par = dataRow.Cells[c].AddParagraph()
             par.AppendText(data[r][c])
             par.Format.HorizontalAlignment = HorizontalAlignment.Left
-            dataRow.Cells[c].Width = 180
+            dataRow.Cells[c].SetCellWidth(180,CellWidthType.Point)
         else:
             par = dataRow.Cells[c].AddParagraph()
             par.AppendText(data[r][c])
             par.Format.HorizontalAlignment = HorizontalAlignment.Right
-            dataRow.Cells[c].Width = 180
+            dataRow.Cells[c].SetCellWidth(180,CellWidthType.Point)
 
 # Save and launch document
 doc.SaveToFile(outputFile, FileFormat.Docx)

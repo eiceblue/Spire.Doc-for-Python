@@ -10,7 +10,7 @@ def _MoidyTableFormat(table):
     table.ApplyStyle(DefaultTableStyle.ColorfulGridAccent3)
 
     # Set table padding
-    table.TableFormat.Paddings.SetAll(5)
+    table.Format.Paddings.SetAll(5)
 
     # Set table title and description
     table.Title = "Spire.Doc for Python"
@@ -18,40 +18,38 @@ def _MoidyTableFormat(table):
 
 
 def _ModifyRowFormat(table):
-    # Set cell spacing
-    table.Rows[0].RowFormat.CellSpacing = 2
-
-    # Set row height
+    #Set cell spacing
+    table.Format.CellSpacing = 2
+    #Set row height
     table.Rows[1].HeightType = TableRowHeightType.Exactly
     table.Rows[1].Height = 20
-
-    # Set background color
-    table.Rows[2].RowFormat.BackColor = Color.get_DarkSeaGreen()
+    row2 = table.Rows[2]
+    #Set background color
+    i = 0
+    while i < row2.Cells.Count:
+        row2.Cells[i].CellFormat.Shading.BackgroundPatternColor = Color.get_DarkSeaGreen()
+        i += 1
 
 
 def _ModifyCellFormat(table):
-    # Set alignment
+    #Set alignment
     table.Rows[0].Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle
     table.Rows[0].Cells[0].Paragraphs[0].Format.HorizontalAlignment = HorizontalAlignment.Center
-
-    # Set background color
-    table.Rows[1].Cells[0].CellFormat.BackColor = Color.get_DarkSeaGreen()
-
-    # Set cell border
-    table.Rows[2].Cells[0].CellFormat.Borders.BorderType(
-        BorderStyle.Single)
-    table.Rows[2].Cells[0].CellFormat.Borders.LineWidth(1)
+    #Set background color
+    table.Rows[1].Cells[0].CellFormat.Shading.BackgroundPatternColor = Color.get_DarkSeaGreen()
+    #Set cell border
+    table.Rows[2].Cells[0].CellFormat.Borders.BorderType=BorderStyle.Single
+    table.Rows[2].Cells[0].CellFormat.Borders.LineWidth=1
     table.Rows[2].Cells[0].CellFormat.Borders.Left.Color = Color.get_Red()
     table.Rows[2].Cells[0].CellFormat.Borders.Right.Color = Color.get_Red()
     table.Rows[2].Cells[0].CellFormat.Borders.Top.Color = Color.get_Red()
     table.Rows[2].Cells[0].CellFormat.Borders.Bottom.Color = Color.get_Red()
-
-    # Set text direction
+    #Set text direction
     table.Rows[3].Cells[0].CellFormat.TextDirection = TextDirection.RightToLeft
-
 
 outputFile = "ModifyTableFormat.docx"
 inputFile = "./Data/ModifyTableFormat.docx"
+
 
 # Load Word document from disk
 document = Document()
@@ -61,12 +59,9 @@ document.LoadFromFile(inputFile)
 section = document.Sections[0]
 
 # Get tables
-tb1 = section.Tables[0] if isinstance(
-    section.Tables[0], Table) else None
-tb2 = section.Tables[1] if isinstance(
-    section.Tables[1], Table) else None
-tb3 = section.Tables[2] if isinstance(
-    section.Tables[2], Table) else None
+tb1 = section.Tables[0] if isinstance(section.Tables[0], Table) else None
+tb2 = section.Tables[1] if isinstance(section.Tables[1], Table) else None
+tb3 = section.Tables[2] if isinstance(section.Tables[2], Table) else None
 
 _MoidyTableFormat(tb1)
 _ModifyRowFormat(tb2)

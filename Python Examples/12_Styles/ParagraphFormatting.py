@@ -12,8 +12,8 @@ para.ApplyStyle(BuiltinStyle.Title)
 
 para = sec.AddParagraph()
 para.AppendText("This paragraph is surrounded with borders.")
-para.Format.Borders.BorderType(BorderStyle.Single)
-para.Format.Borders.Color(Color.get_Red())
+para.Format.Borders.BorderType = BorderStyle.Single
+para.Format.Borders.Color = Color.get_Red()
 
 para = sec.AddParagraph()
 para.AppendText("The alignment of this paragraph is Left.")

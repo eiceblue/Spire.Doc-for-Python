@@ -13,7 +13,10 @@ def addTable(section):
     row.IsHeader = True
     row.Height = 20 #unit: point, 1point = 0.3528 mm
     row.HeightType = TableRowHeightType.Exactly
-    row.RowFormat.BackColor = Color.get_Gray()
+    i = 0
+    while i < row.Cells.Count:
+        row.Cells[i].CellFormat.Shading.BackgroundPatternColor = Color.get_Gray()
+        i += 1
     i = 0
     while i < len(header):
         row.Cells[i].CellFormat.VerticalAlignment = VerticalAlignment.Middle
@@ -28,7 +31,10 @@ def addTable(section):
         dataRow = table.Rows[r + 1]
         dataRow.Height = 20
         dataRow.HeightType = TableRowHeightType.Exactly
-        dataRow.RowFormat.BackColor = Color.Empty()
+        i = 0
+        while i < dataRow.Cells.Count:
+            dataRow.Cells[i].CellFormat.Shading.BackgroundPatternColor = Color.Empty()
+            i += 1
         c = 0
         while c < len(data[r]):
             dataRow.Cells[c].CellFormat.VerticalAlignment = VerticalAlignment.Middle
@@ -40,7 +46,7 @@ def addTable(section):
         if math.fmod(j, 2) == 0:
             row2 = table.Rows[j]
             for f in range(row2.Cells.Count):
-                row2.Cells[f].CellFormat.BackColor = Color.get_LightBlue()
+                row2.Cells[f].CellFormat.Shading.BackgroundPatternColor = Color.get_LightBlue()
 
      
 outputFile = "CreateTable.docx"

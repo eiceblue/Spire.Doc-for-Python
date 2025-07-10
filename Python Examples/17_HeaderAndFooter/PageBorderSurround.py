@@ -8,8 +8,8 @@ doc = Document()
 section = doc.AddSection()
 
 # Add a sample page border to the document
-section.PageSetup.Borders.BorderType(BorderStyle.Wave)
-section.PageSetup.Borders.Color(Color.get_Green())
+section.PageSetup.Borders.BorderType=BorderStyle.Wave
+section.PageSetup.Borders.Color=Color.get_Green()
 section.PageSetup.Borders.Left.Space = 20.0
 section.PageSetup.Borders.Right.Space = 20.0
 

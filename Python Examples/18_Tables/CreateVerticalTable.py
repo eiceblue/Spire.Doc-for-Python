@@ -20,11 +20,11 @@ cell.AddParagraph().AppendText("Draft copy in vertical style")
 cell.CellFormat.TextDirection = TextDirection.RightToLeftRotated
 
 # Set the table format.
-table.TableFormat.WrapTextAround = True
-table.TableFormat.Positioning.VertRelationTo = VerticalRelation.Page
-table.TableFormat.Positioning.HorizRelationTo = HorizontalRelation.Page
-table.TableFormat.Positioning.HorizPosition = section.PageSetup.PageSize.Width - table.Width
-table.TableFormat.Positioning.VertPosition = 200
+table.Format.WrapTextAround = True
+table.Format.Positioning.VertRelationTo = VerticalRelation.Page
+table.Format.Positioning.HorizRelationTo = HorizontalRelation.Page
+table.Format.Positioning.HorizPosition = section.PageSetup.PageSize.Width - table.Width
+table.Format.Positioning.VertPosition = 200
 
 # Save to file.
 document.SaveToFile(outputFile, FileFormat.Docx2013)

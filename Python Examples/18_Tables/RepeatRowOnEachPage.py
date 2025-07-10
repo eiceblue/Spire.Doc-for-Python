@@ -20,10 +20,16 @@ table.PreferredWidth = width
 row = table.AddRow()
 # Set the row as a table header
 row.IsHeader = True
-# Set the backcolor of row
-row.RowFormat.BackColor = Color.get_LightGray()
+
 # Add a new cell for row
 cell = row.AddCell()
+
+#Set the backcolor of row
+i = 0
+while i < row.Cells.Count:
+    row.Cells[i].CellFormat.Shading.BackgroundPatternColor = Color.get_LightGray()
+    i += 1
+
 cell.SetCellWidth(100, CellWidthType.Percentage)
 # Add a paragraph for cell to put some data
 parapraph = cell.AddParagraph()
@@ -34,7 +40,12 @@ parapraph.Format.HorizontalAlignment = HorizontalAlignment.Center
 
 row = table.AddRow(False, 1)
 row.IsHeader = True
-row.RowFormat.BackColor = Color.get_Ivory()
+
+i = 0
+while i < row.Cells.Count:
+    row.Cells[i].CellFormat.Shading.BackgroundPatternColor = Color.get_Ivory()
+    i += 1
+
 # Set row height
 row.Height = 30
 cell = row.Cells[0]
@@ -62,7 +73,7 @@ for j in range(1, table.Rows.Count):
     if math.fmod(j, 2) == 0:
         row2 = table.Rows[j]
         for f in range(row2.Cells.Count):
-            row2.Cells[f].CellFormat.BackColor = Color.get_LightBlue()
+            row2.Cells[f].CellFormat.Shading.BackgroundPatternColor = Color.get_LightBlue()
 
 # Save file.
 document.SaveToFile(outputFile, FileFormat.Docx)
