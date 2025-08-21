@@ -1,5 +1,3 @@
-# Python代码核心功能提取
-
 # Spire.Doc Python Hello World
 ## Create a simple Word document with Hello World text
 ```python
@@ -8494,4 +8492,5 @@ chart.Series.Add("Series 3", ["Word", "PDF", "Excel", "GoogleDocs", "Office"],
 ```
 
 ---
+
 
