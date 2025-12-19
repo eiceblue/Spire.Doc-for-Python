@@ -6,7 +6,7 @@ outputFile = "Lists.docx"
 
 
 #Initialize a document
-document = Document()
+document =  Document()
 #Add a section
 sec = document.AddSection()
 #Add paragraph and set list style
@@ -18,20 +18,15 @@ paragraph = sec.AddParagraph()
 paragraph.AppendText("Numbered List:").CharacterFormat.Bold = True
 
 #Create list style
-numberList = ListStyle(document, ListType.Numbered)
-numberList.Name = "numberList"
+numberList = document.Styles.Add(ListType.Numbered, "numberList")
+Levels = numberList.ListRef.Levels
 #%1-%9
-numberList.Levels[1].NumberPrefix = "%1."
-numberList.Levels[1].PatternType = ListPatternType.Arabic
-numberList.Levels[2].NumberPrefix = "%1.%2."
-numberList.Levels[2].PatternType = ListPatternType.Arabic
+Levels[1].NumberPrefix = "%1."
+Levels[1].PatternType = ListPatternType.Arabic
+Levels[2].NumberPrefix = "%1.%2."
+Levels[2].PatternType = ListPatternType.Arabic
 
-bulletList = ListStyle(document, ListType.Bulleted)
-bulletList.Name = "bulletList"
-
-#add the list style into document
-document.ListStyles.Add(numberList)
-document.ListStyles.Add(bulletList)
+bulletList = document.Styles.Add(ListType.Bulleted, "bulletList")
 
 #Add paragraph and apply the list style
 paragraph = sec.AddParagraph()
@@ -79,22 +74,22 @@ paragraph.AppendText("Bulleted List:").CharacterFormat.Bold = True
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 1")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 2")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 2.1")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 paragraph.ListFormat.ListLevelNumber = 1
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 2.2")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 paragraph.ListFormat.ListLevelNumber = 1
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 3")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 
 #Save doc file.
 document.SaveToFile(outputFile, FileFormat.Docx)

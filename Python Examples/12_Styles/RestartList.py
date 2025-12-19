@@ -2,8 +2,8 @@
 from spire.doc.common import *
 
 outputFile = "RestartList.docx"
-#Create word document
-document = Document()
+ #Create word document
+document =  Document()
 
 #Create a new section
 section = document.AddSection()
@@ -14,9 +14,7 @@ paragraph = section.AddParagraph()
 #Append Text
 paragraph.AppendText("List 1")
 
-numberList = ListStyle(document, ListType.Numbered)
-numberList.Name = "Numbered1"
-document.ListStyles.Add(numberList)
+numberList = document.Styles.Add(ListType.Numbered, "Numbered1")
 
 #Add paragraph and apply the list style
 paragraph = section.AddParagraph()
@@ -39,11 +37,10 @@ paragraph.ListFormat.ApplyStyle(numberList.Name)
 paragraph = section.AddParagraph()
 paragraph.AppendText("List 2")
 
-numberList2 = ListStyle(document, ListType.Numbered)
-numberList2.Name = "Numbered2"
+numberList2 = document.Styles.Add(ListType.Numbered, "Numbered2")
+Levels = numberList2.ListRef.Levels
 #set start number of second list
-numberList2.Levels[0].StartAt = 10
-document.ListStyles.Add(numberList2)
+Levels[0].StartAt = 10
 
 #Add paragraph and apply the list style
 paragraph = section.AddParagraph()

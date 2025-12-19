@@ -23,23 +23,21 @@ paragraph.AppendText(BuiltinStyle.Heading2.name)
 paragraph.ApplyStyle(BuiltinStyle.Heading2)
 
 #List style for Headings 2.
-listSty2 = ListStyle(document, ListType.Numbered)
-for i in range(listSty2.Levels.Count):
-    listLev = listSty2.Levels.get_Item(i)
+listStyle2 =  document.Styles.Add(ListType.Numbered, "MyStyle2")
+Levels = listStyle2.ListRef.Levels
+for i in range(Levels.Count):
+    listLev = Levels.get_Item(i)
     listLev.UsePrevLevelPattern = True
     listLev.NumberPrefix = "1."
-listSty2.Name = "MyStyle2"
-document.ListStyles.Add(listSty2)
-paragraph.ListFormat.ApplyStyle(listSty2.Name)
+paragraph.ListFormat.ApplyStyle(listStyle2.Name)
 
 #Add list style 3.
-listSty3 = ListStyle(document, ListType.Numbered)
-for i in range(listSty3.Levels.Count):
-    listLev = listSty3.Levels.get_Item(i)
+listStyle3 = document.Styles.Add(ListType.Numbered, "MyStyle3")
+Levels1 = listStyle3.ListRef.Levels
+for i in range(Levels1.Count):
+    listLev = Levels1.get_Item(i)
     listLev.UsePrevLevelPattern = True
     listLev.NumberPrefix = "1.1."
-listSty3.Name = "MyStyle3"
-document.ListStyles.Add(listSty3)
 
 #Add Heading 3.
 for i in range(0, 4):
@@ -50,7 +48,8 @@ for i in range(0, 4):
 
     #Apply list style 3 for Heading 3
     paragraph.ApplyStyle(BuiltinStyle.Heading3)
-    paragraph.ListFormat.ApplyStyle(listSty3.Name)
+    paragraph.ListFormat.ApplyStyle(listStyle3.Name)
 #Save the file.
 document.SaveToFile(outputFile, FileFormat.Docx2013)
 document.Close()
+

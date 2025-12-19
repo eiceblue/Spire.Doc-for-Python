@@ -4,7 +4,7 @@ from spire.doc.common import *
 
 outputFile = "Styles.docx"     
 #Initialize a document
-document =Document()
+document =  Document()
 sec = document.AddSection()
 #Add default title style to document and modify
 titleStyle = document.AddStyle(BuiltinStyle.Title)
@@ -38,11 +38,7 @@ heading2Style.CharacterFormat.FontSize = 12
 heading2Style.CharacterFormat.Bold = True
 
 #List style
-bulletList = ListStyle(document, ListType.Bulleted)
-bulletList.CharacterFormat.FontName = "cambria"
-bulletList.CharacterFormat.FontSize = 12
-bulletList.Name = "bulletList"
-document.ListStyles.Add(bulletList)
+bulletList = document.Styles.Add(ListType.Bulleted, "bulletList") 
 
 #Apply the style
 paragraph = sec.AddParagraph()
@@ -71,13 +67,13 @@ paragraph.ApplyStyle(BuiltinStyle.Heading2)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("Major:Text")
-paragraph.ListFormat.ApplyStyle("bulletList")
+paragraph.ListFormat.ApplyStyle(bulletList)
 paragraph = sec.AddParagraph()
 paragraph.AppendText("Minor:Text")
-paragraph.ListFormat.ApplyStyle("bulletList")
+paragraph.ListFormat.ApplyStyle(bulletList)
 paragraph = sec.AddParagraph()
 paragraph.AppendText("Related coursework:Text")
-paragraph.ListFormat.ApplyStyle("bulletList")
+paragraph.ListFormat.ApplyStyle(bulletList)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("Skills & Abilities")
@@ -89,7 +85,7 @@ paragraph.ApplyStyle(BuiltinStyle.Heading2)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("Think a document that looks this good has to be difficult to format? Think again! To easily apply any text formatting you see in this document with just a click, on the Home tab of the ribbon, check out Styles.")
-paragraph.ListFormat.ApplyStyle("bulletList")
+paragraph.ListFormat.ApplyStyle(bulletList)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("COMMUNICATION")
@@ -97,7 +93,7 @@ paragraph.ApplyStyle(BuiltinStyle.Heading2)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("You delivered that big presentation to rave reviews. Don’t be shy about it now! This is the place to show how well you work and play with others.")
-paragraph.ListFormat.ApplyStyle("bulletList")
+paragraph.ListFormat.ApplyStyle(bulletList)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("LEADERSHIP")
@@ -105,7 +101,7 @@ paragraph.ApplyStyle(BuiltinStyle.Heading2)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("Are you president of your fraternity, head of the condo board, or a team lead for your favorite charity? You’re a natural leader—tell it like it is!")
-paragraph.ListFormat.ApplyStyle("bulletList")
+paragraph.ListFormat.ApplyStyle(bulletList)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("Experience")
@@ -117,9 +113,8 @@ paragraph.ApplyStyle(BuiltinStyle.Heading2)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("This is the place for a brief summary of your key responsibilities and most stellar accomplishments.")
-paragraph.ListFormat.ApplyStyle("bulletList")
+paragraph.ListFormat.ApplyStyle(bulletList)
 
 #Save to docx file.
 document.SaveToFile(outputFile, FileFormat.Docx)
 document.Close()
-

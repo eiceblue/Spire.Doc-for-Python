@@ -641,23 +641,21 @@ paragraph.AppendText(BuiltinStyle.Heading2.name)
 paragraph.ApplyStyle(BuiltinStyle.Heading2)
 
 #List style for Headings 2.
-listSty2 = ListStyle(document, ListType.Numbered)
-for i in range(listSty2.Levels.Count):
-    listLev = listSty2.Levels.get_Item(i)
+listStyle2 =  document.Styles.Add(ListType.Numbered, "MyStyle2")
+Levels = listStyle2.ListRef.Levels
+for i in range(Levels.Count):
+    listLev = Levels.get_Item(i)
     listLev.UsePrevLevelPattern = True
     listLev.NumberPrefix = "1."
-listSty2.Name = "MyStyle2"
-document.ListStyles.Add(listSty2)
-paragraph.ListFormat.ApplyStyle(listSty2.Name)
+paragraph.ListFormat.ApplyStyle(listStyle2.Name)
 
 #Add list style 3.
-listSty3 = ListStyle(document, ListType.Numbered)
-for i in range(listSty3.Levels.Count):
-    listLev = listSty3.Levels.get_Item(i)
+listStyle3 = document.Styles.Add(ListType.Numbered, "MyStyle3")
+Levels1 = listStyle3.ListRef.Levels
+for i in range(Levels1.Count):
+    listLev = Levels1.get_Item(i)
     listLev.UsePrevLevelPattern = True
     listLev.NumberPrefix = "1.1."
-listSty3.Name = "MyStyle3"
-document.ListStyles.Add(listSty3)
 
 #Add Heading 3.
 for i in range(0, 4):
@@ -668,7 +666,7 @@ for i in range(0, 4):
 
     #Apply list style 3 for Heading 3
     paragraph.ApplyStyle(BuiltinStyle.Heading3)
-    paragraph.ListFormat.ApplyStyle(listSty3.Name)
+    paragraph.ListFormat.ApplyStyle(listStyle3.Name)
 ```
 
 ---
@@ -853,7 +851,7 @@ document.Sections[0].Paragraphs.Insert(1, para)
 paragraph = document.Sections[0].Paragraphs[0]
 
 #Set the Frame's position
-if paragraph.IsFrame:
+if paragraph.Frame.IsFrame:
     paragraph.Frame.SetHorizontalPosition(150)
     paragraph.Frame.SetVerticalPosition(150)
 ```
@@ -3019,39 +3017,39 @@ document = Document()
 section = document.AddSection()
 
 #Create four list styles based on different ASCII characters
-listStyle1 = ListStyle(document, ListType.Bulleted)
-listStyle1.Name = "liststyle"
-listStyle1.Levels[0].BulletCharacter = "\u006e"
-listStyle1.Levels[0].CharacterFormat.FontName = "Wingdings"
-document.ListStyles.Add(listStyle1)
-listStyle2 = ListStyle(document, ListType.Bulleted)
-listStyle2.Name = "liststyle2"
-listStyle2.Levels[0].BulletCharacter = "\u0075"
-listStyle2.Levels[0].CharacterFormat.FontName = "Wingdings"
-document.ListStyles.Add(listStyle2)
-listStyle3 = ListStyle(document, ListType.Bulleted)
-listStyle3.Name = "liststyle3"
-listStyle3.Levels[0].BulletCharacter = "\u00b2"
-listStyle3.Levels[0].CharacterFormat.FontName = "Wingdings"
-document.ListStyles.Add(listStyle3)
-listStyle4 = ListStyle(document, ListType.Bulleted)
-listStyle4.Name = "liststyle4"
-listStyle4.Levels[0].BulletCharacter = "\u00d8"
-listStyle4.Levels[0].CharacterFormat.FontName = "Wingdings"
-document.ListStyles.Add(listStyle4)
+listStyle1 =  document.Styles.Add(ListType.Bulleted, "liststyle")
+Levels = listStyle1.ListRef.Levels
+Levels[0].BulletCharacter = "\u006e"
+Levels[0].CharacterFormat.FontName = "Wingdings"
+
+listStyle2 = document.Styles.Add(ListType.Bulleted, "liststyle2")
+Levels2 = listStyle2.ListRef.Levels
+
+Levels2[0].BulletCharacter = "\u0075"
+Levels2[0].CharacterFormat.FontName = "Wingdings"
+
+listStyle3 = document.Styles.Add(ListType.Bulleted, "liststyle3")
+Levels3 = listStyle3.ListRef.Levels
+Levels3[0].BulletCharacter = "\u00b2"
+Levels3[0].CharacterFormat.FontName = "Wingdings"
+
+listStyle4 = document.Styles.Add(ListType.Bulleted, "liststyle4")
+Levels4 = listStyle4.ListRef.Levels
+Levels4[0].BulletCharacter = "\u00d8"
+Levels4[0].CharacterFormat.FontName = "Wingdings"
 
 #Add four paragraphs and apply list style separately
 p1 = section.Body.AddParagraph()
 p1.AppendText("Spire.Doc for .NET")
 p1.ListFormat.ApplyStyle(listStyle1.Name)
 p2 = section.Body.AddParagraph()
-p2.AppendText("Spire.Doc for Java")
+p2.AppendText("Spire.Doc for .NET")
 p2.ListFormat.ApplyStyle(listStyle2.Name)
 p3 = section.Body.AddParagraph()
-p3.AppendText("Spire.Doc for C++")
+p3.AppendText("Spire.Doc for .NET")
 p3.ListFormat.ApplyStyle(listStyle3.Name)
 p4 = section.Body.AddParagraph()
-p4.AppendText("Spire.Doc for Python")
+p4.AppendText("Spire.Doc for .NET")
 p4.ListFormat.ApplyStyle(listStyle4.Name)
 ```
 
@@ -3284,20 +3282,15 @@ paragraph = sec.AddParagraph()
 paragraph.AppendText("Numbered List:").CharacterFormat.Bold = True
 
 #Create list style
-numberList = ListStyle(document, ListType.Numbered)
-numberList.Name = "numberList"
+numberList = document.Styles.Add(ListType.Numbered, "numberList")
+Levels = numberList.ListRef.Levels
 #%1-%9
-numberList.Levels[1].NumberPrefix = "%1."
-numberList.Levels[1].PatternType = ListPatternType.Arabic
-numberList.Levels[2].NumberPrefix = "%1.%2."
-numberList.Levels[2].PatternType = ListPatternType.Arabic
+Levels[1].NumberPrefix = "%1."
+Levels[1].PatternType = ListPatternType.Arabic
+Levels[2].NumberPrefix = "%1.%2."
+Levels[2].PatternType = ListPatternType.Arabic
 
-bulletList = ListStyle(document, ListType.Bulleted)
-bulletList.Name = "bulletList"
-
-#add the list style into document
-document.ListStyles.Add(numberList)
-document.ListStyles.Add(bulletList)
+bulletList = document.Styles.Add(ListType.Bulleted, "bulletList")
 
 #Add paragraph and apply the list style
 paragraph = sec.AddParagraph()
@@ -3345,22 +3338,22 @@ paragraph.AppendText("Bulleted List:").CharacterFormat.Bold = True
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 1")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 2")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 2.1")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 paragraph.ListFormat.ListLevelNumber = 1
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 2.2")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 paragraph.ListFormat.ListLevelNumber = 1
 paragraph = sec.AddParagraph()
 paragraph.AppendText("List Item 3")
-paragraph.ListFormat.ApplyStyle(bulletList.Name)
+paragraph.ListFormat.ApplyStyle(bulletList)
 ```
 
 ---
@@ -3468,9 +3461,7 @@ paragraph = section.AddParagraph()
 #Append Text
 paragraph.AppendText("List 1")
 
-numberList = ListStyle(document, ListType.Numbered)
-numberList.Name = "Numbered1"
-document.ListStyles.Add(numberList)
+numberList = document.Styles.Add(ListType.Numbered, "Numbered1")
 
 #Add paragraph and apply the list style
 paragraph = section.AddParagraph()
@@ -3493,11 +3484,10 @@ paragraph.ListFormat.ApplyStyle(numberList.Name)
 paragraph = section.AddParagraph()
 paragraph.AppendText("List 2")
 
-numberList2 = ListStyle(document, ListType.Numbered)
-numberList2.Name = "Numbered2"
+numberList2 = document.Styles.Add(ListType.Numbered, "Numbered2")
+Levels = numberList2.ListRef.Levels
 #set start number of second list
-numberList2.Levels[0].StartAt = 10
-document.ListStyles.Add(numberList2)
+Levels[0].StartAt = 10
 
 #Add paragraph and apply the list style
 paragraph = section.AddParagraph()
@@ -3544,44 +3534,39 @@ for i in range(doc.Sections.Count):
 document = Document()
 document.AddSection()
 
-# Title style customization
+#Add default title style to document and modify
 titleStyle = document.AddStyle(BuiltinStyle.Title)
-titleStyle.CharacterFormat.FontName = "cambria"
+titleStyle.CharacterFormat.FontName= "cambria"
 titleStyle.CharacterFormat.FontSize = 28
-titleStyle.CharacterFormat.TextColor = Color.FromArgb(255, 42, 123, 136)
-
-# Paragraph format for title style
+titleStyle.CharacterFormat.TextColor = Color.FromArgb(255,42, 123, 136)
+#judge if it is Paragraph Style and then set paragraph format
 if isinstance(titleStyle, ParagraphStyle):
     ps = titleStyle if isinstance(titleStyle, ParagraphStyle) else None
     ps.ParagraphFormat.Borders.Bottom.BorderType = BorderStyle.Single
-    ps.ParagraphFormat.Borders.Bottom.Color = Color.FromArgb(255, 42, 123, 136)
+    ps.ParagraphFormat.Borders.Bottom.Color = Color.FromArgb(255,42, 123, 136)
     ps.ParagraphFormat.Borders.Bottom.LineWidth = 1.5
     ps.ParagraphFormat.HorizontalAlignment = HorizontalAlignment.Left
-
-# Normal style customization
+#Add default normal style and modify
 normalStyle = document.AddStyle(BuiltinStyle.Normal)
 normalStyle.CharacterFormat.FontName = "cambria"
 normalStyle.CharacterFormat.FontSize = 11
 
-# Heading1 style customization
+#Add default heading1 style
 heading1Style = document.AddStyle(BuiltinStyle.Heading1)
+
 heading1Style.CharacterFormat.FontName = "cambria"
 heading1Style.CharacterFormat.FontSize = 14
-heading1Style.CharacterFormat.Bold = True
-heading1Style.CharacterFormat.TextColor = Color.FromArgb(255, 42, 123, 136)
 
-# Heading2 style customization
+heading1Style.CharacterFormat.Bold = True
+heading1Style.CharacterFormat.TextColor = Color.FromArgb(255,42, 123, 136)
+#Add default heading2 style
 heading2Style = document.AddStyle(BuiltinStyle.Heading2)
 heading2Style.CharacterFormat.FontName = "cambria"
 heading2Style.CharacterFormat.FontSize = 12
 heading2Style.CharacterFormat.Bold = True
 
-# Custom list style creation
-bulletList = ListStyle(document, ListType.Bulleted)
-bulletList.CharacterFormat.FontName = "cambria"
-bulletList.CharacterFormat.FontSize = 12
-bulletList.Name = "bulletList"
-document.ListStyles.Add(bulletList)
+#List style
+bulletList = document.Styles.Add(ListType.Bulleted, "bulletList") 
 ```
 
 ---
@@ -8489,6 +8474,64 @@ chart.Series.Add("Series 2", ["Word", "PDF", "Excel", "GoogleDocs", "Office"],
 
 chart.Series.Add("Series 3", ["Word", "PDF", "Excel", "GoogleDocs", "Office"],
                  [500000.0, 820000.0, 1500000.0, 400000.0, 100000.0])
+```
+
+---
+
+# spire.doc Mark As Final
+## Demonstrates how to mark a document as final by adding a custom document property
+```python
+# Create a new Document object
+document = Document()
+
+# Get the custom document properties
+customProperties = document.CustomDocumentProperties
+
+# Add _MarkAsFinal custom document property
+customProperties.Add("_MarkAsFinal", Boolean(True))
+```
+
+---
+
+# Document Revision Author Setting
+## Set author for document revisions including paragraphs and text ranges
+```python
+# Loop through each section in the document.
+for i in range(document.Sections.Count):
+    sec = document.Sections.get_Item(i)
+    # Iterate through each element under the body of the section.
+    for j in range(sec.Body.ChildObjects.Count):
+        docItem = sec.Body.ChildObjects.get_Item(j)
+        # Check if the current item is an instance of Paragraph.
+        if isinstance(docItem, Paragraph):
+            para = docItem
+            # Set author for paragraph revisions
+            if para.IsInsertRevision:  
+                para.InsertRevision.Author="E-iceblue"
+            elif para.IsDeleteRevision:
+                para.DeleteRevision.Author="E-iceblue"
+            # Iterate through each child object within the paragraph.
+            for k in range(para.ChildObjects.Count):
+                textRange = para.ChildObjects.get_Item(k)
+                # Check if the current item is an instance of TextRange.
+                if isinstance(textRange, TextRange):
+                    # Set author for text range revisions
+                    if textRange.IsInsertRevision:
+                        textRange.InsertRevision.Author="E-iceblue"
+                    elif textRange.IsDeleteRevision:
+                        textRange.DeleteRevision.Author="E-iceblue"
+```
+
+---
+
+# spire.doc PDF conversion with custom fonts
+## Convert Word document to PDF using custom fonts folders
+```python
+# Create a new Document object
+document = Document()
+
+# When the system does not have the fonts used in a document installed, you can place the required fonts in a custom folder and then use setCustomFontsFolders to specify that the program should retrieve fonts from this path
+document.SetCustomFontsFolders("D:\\Fonts")
 ```
 
 ---

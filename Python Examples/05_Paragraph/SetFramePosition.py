@@ -16,7 +16,7 @@ document.LoadFromFile(inputFile)
 paragraph = document.Sections[0].Paragraphs[0]
 
 #Set the Frame's position
-if paragraph.IsFrame:
+if paragraph.Frame.IsFrame:
     paragraph.Frame.SetHorizontalPosition(150)
     paragraph.Frame.SetVerticalPosition(150)
 
