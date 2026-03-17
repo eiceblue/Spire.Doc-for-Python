@@ -1,6 +1,6 @@
 ﻿from spire.doc import *
 from spire.doc.common import *
-from spire.doc.charts import ChartType
+from spire.doc.charts.ChartType import ChartType
 
 outputFile = "AppendColumnChart.docx"
 
@@ -42,4 +42,5 @@ chart.AxisY.NumberFormat.FormatCode = "#,##0"
 document.SaveToFile(outputFile, FileFormat.Docx)
 
 # Dispose of the document object when finished using it
+document.Dispose()
 document.Dispose()

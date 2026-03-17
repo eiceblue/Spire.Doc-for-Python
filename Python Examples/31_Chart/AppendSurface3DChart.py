@@ -1,6 +1,6 @@
 ﻿from spire.doc import *
 from spire.doc.common import *
-from spire.doc.charts import ChartType
+from spire.doc.charts.ChartType import ChartType
 
 outputFile = "AppendSurface3DChart.docx"
 
