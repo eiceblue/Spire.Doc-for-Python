@@ -8785,3 +8785,550 @@ chart.AxisX.Units.Major = 100
 
 ---
 
+# spire.doc python core functionality  
+## Convert Word document to MHTML (MHT) format  
+```python
+document = Document()
+document.LoadFromFile("data\\ToMhtml.docx")
+document.SaveToFile("ToMhtml-out.mhtml", FileFormat.Mhtml)
+document.Close()
+document.Dispose()
+```
+
+---
+
+# spire.doc python core function
+## convert Word to XLSX
+```python
+# Create a new instance of the Document class
+document = Document()
+# Load an existing Word document
+document.LoadFromFile("Data\\ConvertedToXLSX.docx")
+# Convert the Word document to XLSX file
+document.SaveToFile("ToXLSX.xlsx", FileFormat.XLSX)
+# Close the document to release resources
+document.Close()
+# Dispose of the document object to free up memory
+document.Dispose()
+```
+
+---
+
+# spire.doc python core functionality
+## Word to HTML retaining MathML
+```python
+document = Document()
+document.LoadFromFile("Data\\GetMathEquation.docx")
+htmlExportOptions = document.HtmlExportOptions
+htmlExportOptions.OfficeMathOutputMode = HtmlOfficeMathOutputMode.MathML
+htmlExportOptions.CssStyleSheetType = CssStyleSheetType.Internal
+document.SaveToFile("WordToHtmlRetainMathML.html", FileFormat.Html)
+```
+
+---
+
+# spire.doc python core functionality
+## DocumentNavigator Character Format operations
+```python
+doc = Document()
+navigator = DocumentNavigator(doc)
+
+navigator.Write("Write plain text into the document (without special formatting yet).")
+
+navigator.InsertBreak(BreakType.LineBreak)
+
+navigator.CharacterFormat.UnderlineColor = Color.get_OrangeRed()
+navigator.CharacterFormat.UnderlineStyle = UnderlineStyle.Single
+navigator.CharacterFormat.Bold = True
+navigator.CharacterFormat.IsShadow = True
+navigator.CharacterFormat.TextColor = Color.get_Blue()
+
+navigator.Write("Write formatted text using the current character formatting settings.")
+
+navigator.InsertBreak(BreakType.LineBreak)
+
+navigator.PushCharacterFormat()
+navigator.CharacterFormat.ClearFormatting()
+navigator.Write("Write text with cleared (default) formatting")
+navigator.InsertBreak(BreakType.LineBreak)
+
+navigator.PopCharacterFormat()
+navigator.Write("Write text using the restored formatting.")
+```
+
+---
+
+# spire.doc python core function
+## Insert HTML into a Word document using DocumentNavigator
+
+```python
+# Create a new Document object to represent an empty Word document.
+doc = Document()
+
+# Initialize a DocumentNavigator instance to simplify content insertion and navigation within the document.
+navigator = DocumentNavigator(doc)
+
+html = "<body style=\"font-family: Arial, sans-serif background-color: #f4f4f9 color: #333 padding: 20px line-height: 1.6\">\r\n    <h1 style=\"color: #2c3e50\">Welcome to the Random English Page!</h1>\r\n    <p>This is a randomly generated HTML document containing English text.</p>\r\n    <p>The quick brown <span style=\"background-color: #fffacd padding: 4px 8px border-radius: 4px\">fox jumps</span> over the lazy dog. This sentence contains every letter of the English alphabet.</p>\r\n    <p>Here are a few fun facts:</p>\r\n    <ul>\r\n        <li>English is spoken by over 1.5 billion people worldwide.</li>\r\n        <li>The word \"set\" has the most definitions in the English language.</li>\r\n        <li>\"Dreamt\" is the only English word that ends with \"mt\".</li>\r\n    </ul>\r\n    <p>Thank you for visiting! Have a wonderful day.</p>\r\n</body>"
+
+# Insert the HTML content into the document at the current cursor position.
+navigator.InsertHtml(html)
+```
+
+---
+
+# Spire.Doc InsertCheckBox
+## Insert checkboxes using DocumentNavigator with various states (checked/unchecked, default/selected)
+
+```python
+# Create a new Document object to represent a Word document.
+doc = Document()
+
+# Initialize a DocumentNavigator to assist with content insertion and navigation.
+navigator = DocumentNavigator(doc)
+
+# Get the current section of the document where content will be added.
+section = navigator.CurrentSection
+
+# Add a new paragraph to the section.
+paragraph = section.AddParagraph()
+
+# Append descriptive text indicating a checkbox control will follow (default unselected).
+paragraph.AppendText("Add CheckBox Content Control: ")
+
+# Append additional label text for the first checkbox example.
+paragraph.AppendText("Default: Unselected: ")
+
+# Move the cursor to the beginning of the first paragraph (index 1, offset 0) to insert content precisely.
+navigator.MoveToParagraph(1, 0)
+
+# Insert an unchecked checkbox content control named "Checkbox1" with a size of 20 points.
+navigator.InsertCheckBox("Checkbox1", False, 20)
+
+# Add a new paragraph for the second checkbox example.
+paragraph = section.AddParagraph()
+
+# Append label text indicating this checkbox is selected by default.
+paragraph.AppendText("Default: Selected: ")
+
+# Move the cursor to the beginning of the second paragraph (index 2, offset 0).
+navigator.MoveToParagraph(2, 0)
+
+# Insert a checked checkbox content control named "Checkbox2" with a size of 20 points.
+navigator.InsertCheckBox("Checkbox2", True, 20)
+
+# Add a new paragraph for the third checkbox example.
+paragraph = section.AddParagraph()
+
+# Append label text explaining that this checkbox starts unchecked but will be set to checked via API.
+paragraph.AppendText("Default: Uncheck. Set to check now: ")
+
+# Move the cursor to the beginning of the third paragraph (index 3, offset 0).
+navigator.MoveToParagraph(3, 0)
+
+# Insert a checkbox named "Checkbox3" that is initially unchecked (false), then programmatically marked as checked (true), with size 20.
+navigator.InsertCheckBox("Checkbox3", False, True, 20)
+
+# Add a new paragraph for the fourth checkbox example.
+paragraph = section.AddParagraph()
+
+# Append label text for a checkbox that appears selected by default in the UI but is actually stored as unchecked.
+paragraph.AppendText("Default selection, unselected by default: ")
+
+# Move the cursor to the beginning of the fourth paragraph (index 4, offset 0).
+navigator.MoveToParagraph(4, 0)
+
+# Insert a checkbox named "Checkbox4" that appears checked (true) but is stored as unchecked (false), with size 20.
+navigator.InsertCheckBox("Checkbox4", True, False, 20)
+```
+
+---
+
+# spire.doc python core function  
+## Insert page fields into document  
+```python
+# Create a DocumentNavigator instance (automatically creates an underlying empty document)
+navigator = DocumentNavigator()
+
+# Write label text
+navigator.Writeln("Add page fields:")
+
+# Insert a PAGE field with numeric formatting code
+navigator.InsertField("PAGE \\# \"Page 0\"")
+
+# Insert a paragraph break
+navigator.Writeln()
+
+# Insert a PAGE field with a custom result text (placeholder)
+navigator.InsertField("PAGE \\# \"Page 0\"", "3")
+
+# Insert another paragraph break
+navigator.Writeln()
+
+# Insert a built-in PAGE field using FieldType enumeration, showing the field result
+navigator.InsertField(FieldType.FieldPage, True)
+
+# Insert another paragraph break
+navigator.Writeln()
+
+# Insert a built-in PAGE field, hiding the field result (display field code instead)
+navigator.InsertField(FieldType.FieldPage, False)
+```
+
+---
+
+# spire.doc python core functionality  
+## Insert images using DocumentNavigator with various positioning options  
+
+```python
+imgpath = "Data\\E-iceblue.png"
+
+doc = Document()
+navigator = DocumentNavigator(doc)
+
+# Insert a picture directly
+navigator.Writeln("Insert the picture directly:")
+navigator.InsertImage(imgpath)
+
+# Move to a new section and insert image with specified dimensions
+section = doc.AddSection()
+navigator.MoveToSection(1)
+navigator.Writeln("Set the width and height of the image:")
+navigator.InsertImage(imgpath, 100.0, 100.0)
+
+# Insert a page break then image with advanced positioning and wrapping
+navigator.InsertBreak(BreakType.PageBreak)
+navigator.Writeln("Set the width, height, offset, and wrapping style of the image:")
+navigator.InsertImage(imgpath, HorizontalOrigin.LeftMarginArea, 100.0, VerticalOrigin.Paragraph, 50.0, 100.0, 100.0, TextWrappingStyle.Through)
+```
+
+---
+
+# spire.doc python core functionality  
+## Insert text form fields of different types (Calculation, Number, Date) into a Word document using DocumentNavigator  
+```python
+# Create a new empty Word document.
+doc = Document()
+
+# Initialize a DocumentNavigator to help insert content and form fields into the document.
+navigator = DocumentNavigator(doc)
+
+# Write a label indicating the type of the following form field: Calculation.
+navigator.Write("TextFormFieldType.Calculation: ")
+
+# Insert a calculation-type text form field.
+navigator.InsertTextFormField("CalculationTextField", TextFormFieldType.Calculation, "0", "=3+1", 30)
+
+# Insert a line break (carriage return) to move to the next line.
+navigator.Writeln()
+
+# Write a label for a number-only text form field.
+navigator.Write("TextFormFieldType.NumberText: ")
+
+# Insert a number-input text form field.
+navigator.InsertTextFormField("NumberText", TextFormFieldType.NumberText, "0", "100", 30)
+
+# Insert a line break.
+navigator.Writeln()
+
+# Write a label for a date-input text form field.
+navigator.Write("TextFormFieldType.DateText: ")
+
+# Insert a date-formatted text form field.
+navigator.InsertTextFormField("DateText", TextFormFieldType.DateText, "yyyy/M/d", "2025/8/1", 30)
+
+# Insert a line break.
+navigator.Writeln()
+
+# Enable automatic field updating.
+doc.IsUpdateFields = True
+```
+
+---
+
+# spire.doc python core functionality
+## Apply bullet list style using DocumentNavigator.ListFormat
+
+```python
+# Create a new document instance.
+doc = Document()
+
+# Add a new section to the document.
+section = doc.AddSection()
+
+# Add the first paragraph to the section.
+paragraph = section.AddParagraph()
+# Append text to the first paragraph.
+paragraph.AppendText("This is the first paragraph.")
+
+# Add a second paragraph to the section.
+paragraph = section.AddParagraph()
+# Append text to the second paragraph.
+paragraph.AppendText("This is the second paragraph.")
+
+# Add a third paragraph to the section.
+paragraph = section.AddParagraph()
+# Append text to the third paragraph.
+paragraph.AppendText("This is the third paragraph.")
+
+# Create a document navigator to facilitate navigation and formatting.
+navigator = DocumentNavigator(doc)
+
+# Apply bullet list style to the current position (first paragraph by default).
+navigator.ListFormat.ApplyBulletStyle()
+
+# Move the navigator's cursor to the third paragraph (index 2) at character offset 0.
+navigator.MoveToParagraph(2, 0)
+
+# Apply bullet list style to the third paragraph.
+navigator.ListFormat.ApplyBulletStyle()
+```
+
+---
+
+# spire.doc python core functionality
+## MoveToDocument - use DocumentNavigator to move cursor to document start/end and insert text
+```python
+# Create a new empty document instance.
+doc = Document()
+
+# Create a document navigator to help navigate and modify the document content.
+navigator = DocumentNavigator(doc)
+
+# Move the cursor to the very beginning of the document.
+navigator.MoveToDocumentStart()
+
+# Write a new line of text at the start of the document.
+navigator.Writeln("Insert the content at the beginning of the document.")
+
+# Write another line of text immediately after the previous one at the start.
+navigator.Writeln("This is new content.")
+
+# Move the cursor to the very end of the document.
+navigator.MoveToDocumentEnd()
+
+# Insert a blank line at the end of the document.
+navigator.Writeln()
+
+# Insert a new line of text at the end of the document.
+navigator.Writeln("Insert the content at the end of the document.")
+```
+
+---
+
+# spire.doc python core functionality  
+## Move to header and footer and add text  
+```python
+# Create a new empty document instance.
+doc = Document()
+# Create a document navigator to help navigate and modify the document content.
+navigator = DocumentNavigator(doc)
+# Move the navigator's cursor to the first section of the document (section index 0).
+navigator.MoveToSection(0)
+# Navigate to the footer of the first page in the current section.
+navigator.MoveToHeaderFooter(HeaderFooterType.FooterFirstPage)
+# Write a new line of text into the first-page footer.
+navigator.Writeln("The footer on the first page.")
+# Navigate to the header of the first page in the current section.
+navigator.MoveToHeaderFooter(HeaderFooterType.HeaderFirstPage)
+# Write a new line of text into the first-page header.
+navigator.Writeln("The header on the first page.")
+```
+
+---
+
+# spire.doc python core functionality
+## Move to Paragraphs and Write content
+```python
+# Create a new empty document instance.
+doc = Document()
+
+# Create a document navigator to help navigate and modify the document content.
+navigator = DocumentNavigator(doc)
+
+# Move the navigator's cursor to the first section of the document (section index 0).
+navigator.MoveToSection(0)
+
+# Move the cursor to the third paragraph (index 2) within the current section, at character offset 0.
+navigator.MoveToParagraph(2, 0)
+
+# Insert new text at the current cursor position, overwriting any existing content from that point onward.
+navigator.Write("This is new content......")
+```
+
+---
+
+# spire.doc python core functionality
+## Operate Table Cell
+```python
+def add_cell_content(cell, content):
+    # Add a new paragraph to the table cell.
+    paragraph = cell.AddParagraph()
+    # Append the specified text content to the paragraph inside the cell.
+    paragraph.AppendText(content)
+    # Center-align the text horizontally within the paragraph.
+    paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center
+    # Set the background (shading) color of the table cell to CadetBlue.
+    cell.CellFormat.Shading.BackgroundPatternColor = Color.get_CadetBlue()
+    # Vertically center the content within the table cell.
+    cell.CellFormat.VerticalAlignment = VerticalAlignment.Middle
+
+# Create a new document instance.
+doc = Document()
+# Initialize a document navigator to navigate and modify the document content.
+navigator = DocumentNavigator(doc)
+
+# Begin creating a new table in the document.
+navigator.StartTable()
+
+# Insert the first cell into the current row of the table and get its reference.
+cell1 = navigator.InsertCell()
+# Add content to the first cell of the first row.
+add_cell_content(cell1, "Row 1, Cell 1")
+
+# Insert the second cell into the current row of the table and get its reference.
+cell2 = navigator.InsertCell()
+# Add content to the second cell of the first row.
+add_cell_content(cell2, "Row 1, Cell 2")
+
+# Insert the third cell into the current row of the table and get its reference.
+cell3 = navigator.InsertCell()
+# Add content to the third cell of the first row.
+add_cell_content(cell3, "Row 1, Cell 3")
+
+# End the current row and move to the next row in the table.
+navigator.EndRow()
+
+# Insert the first cell into the new row of the table and get its reference.
+cell4 = navigator.InsertCell()
+# Add content to the first cell of the second row.
+add_cell_content(cell4, "Row 2, Cell 1")
+
+# End the table creation process.
+navigator.EndTable()
+
+# Move the navigator's cursor to a specific cell in the first table
+navigator.MoveToCell(0, 0, 1, 0)
+
+# Insert (overwrite) the text at the current cursor position inside the target cell.
+navigator.Write("new content")
+
+# Get the formatting object of the current cell where the navigator is positioned.
+cellformat = navigator.CellFormat
+# Clear all existing formatting applied to the current cell.
+cellformat.ClearFormatting()
+# Set the background (shading) color of the cell to GreenYellow.
+cellformat.Shading.BackgroundPatternColor = Color.get_GreenYellow()
+```
+
+---
+
+# spire.doc python core functionality
+## Operate table row: create a table, fill cells, and delete a row
+```python
+def add_cell_content(cell, content):
+    # Add a new paragraph to the table cell.
+    paragraph = cell.AddParagraph()
+    # Append the specified text content to the paragraph inside the cell.
+    paragraph.AppendText(content)
+    # Center-align the text horizontally within the paragraph.
+    paragraph.Format.HorizontalAlignment = HorizontalAlignment.Center
+    # Set the background (shading) color of the table cell to CadetBlue.
+    cell.CellFormat.Shading.BackgroundPatternColor = Color.get_CadetBlue()
+    # Vertically center the content within the table cell.
+    cell.CellFormat.VerticalAlignment = VerticalAlignment.Middle
+
+# Create a new empty document instance.
+doc = Document()
+# Create a document navigator to help navigate and modify the document content.
+navigator = DocumentNavigator(doc)
+
+# Start creating a new table and get its reference.
+table = navigator.StartTable()
+# Initialize the table with 2 rows and 2 columns.
+table.ResetCells(2, 2)
+# Set the table width to 100% of the available page width.
+table.PreferredWidth = PreferredWidth(WidthType.Percentage, 100)
+# Apply a single black border with line width 1 to all sides of the table.
+table.Format.Borders.SetBordersAttribute(BorderStyle.Single, 1, Color.get_Black())
+# Set the height of the first row to 30 points.
+table.FirstRow.Height = 30.0
+
+# Get a reference to the first cell in the first row (row 0, column 0).
+cell1 = table.Rows[0].Cells[0]
+# Add content to the first cell of the first row.
+add_cell_content(cell1, "Row 1, Cell 1")
+
+# Get a reference to the second cell in the first row (row 0, column 1).
+cell2 = table.Rows[0].Cells[1]
+# Add content to the second cell of the first row.
+add_cell_content(cell2, "Row 1, Cell 2")
+
+# Get a reference to the first cell in the second row (row 1, column 0).
+cell3 = table.Rows[1].Cells[0]
+# Add content to the first cell of the second row.
+add_cell_content(cell3, "Row 2, Cell 1")
+
+# Get a reference to the second cell in the second row (row 1, column 1).
+cell4 = table.Rows[1].Cells[1]
+# Add content to the second cell of the second row.
+add_cell_content(cell4, "Row 2, Cell 2")
+
+# Finalize the table creation.
+navigator.EndTable()
+
+# Delete the first row (row index 0) of the first table (table index 0) in the document.
+navigator.DeleteRow(0, 0)
+
+# Note: SaveToFile, Close, Dispose are omitted as they are not core functionality.
+```
+
+---
+
+# spire.doc python Core Functionality  
+## Set Page Format (Margins and Page Size) for a Document Section  
+```python
+# Create a new empty document instance
+doc = Document()
+
+# Create a document navigator to help navigate and modify the document content
+navigator = DocumentNavigator(doc)
+
+# Move the navigator's cursor to the first section (section index 0)
+navigator.MoveToSection(0)
+
+# Set the page margins for the current section
+navigator.PageSetup.Margins = MarginsF(100.0, 80.0, 100.0, 80.0)
+
+# Set the page size of the current section to Letter
+navigator.PageSetup.PageSize = PageSize.Letter()
+```
+
+---
+
+# spire.doc python core functionality  
+## Use DocumentNavigator to set paragraph formatting (line spacing, indent, background color)  
+
+```python
+doc = Document()
+navigator = DocumentNavigator(doc)
+
+# Move to first section, first paragraph
+navigator.MoveToSection(0)
+navigator.MoveToParagraph(0, 0)
+
+# Set line spacing to 1.5x multiple
+navigator.ParagraphFormat.LineSpacingRule = LineSpacingRule.Multiple
+navigator.ParagraphFormat.LineSpacing = 1.5 * 12
+
+# Set left indent
+navigator.ParagraphFormat.LeftIndent = 5
+
+# Move to third paragraph (index 2)
+navigator.MoveToParagraph(2, 0)
+
+# Set background color to blue
+navigator.ParagraphFormat.BackColor = Color.get_Blue()
+```
+
+---
+
